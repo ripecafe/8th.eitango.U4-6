@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Here We Go 中学英語2年 新出単語リスト (51-128ページ) - 完全版</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px 25px;
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            padding: 12px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background: #ecf0f1;
+            color: #2c3e50;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: #2980b9;
+            color: white;
+        }
+
+        .vocabulary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .vocab-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .vocab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .vocab-number {
+            display: inline-block;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .vocab-word {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .vocab-pronunciation {
+            color: #e74c3c;
+            font-style: italic;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .vocab-meaning {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .unit-section {
+            background: rgba(255, 255, 255, 0.95);
+            margin-bottom: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .unit-header {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .unit-content {
+            padding: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .footer p {
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-container {
+                flex-direction: column;
+            }
+
+            .vocabulary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Here We Go 中学英語2年</h1>
+            <p>新出単語リスト (51-128ページ) - 完全版</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalWords">387</span>
+                    <span class="stat-label">総単語数</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" id="visibleWords">387</span>
+                    <span class="stat-label">表示中</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">セクション数</span>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchBox" placeholder="🔍 単語を検索... (英語または日本語)">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-unit="all">すべて</button>
+                <button class="filter-btn" data-unit="unit3">Unit 3</button>
+                <button class="filter-btn" data-unit="lets-read">Let's Read</button>
+                <button class="filter-btn" data-unit="unit4">Unit 4</button>
+                <button class="filter-btn" data-unit="unit5">Unit 5</button>
+                <button class="filter-btn" data-unit="unit6">Unit 6</button>
+                <button class="filter-btn" data-unit="daily">Daily Life</button>
+                <button class="filter-btn" data-unit="other">その他</button>
+            </div>
+        </div>
+
+        <div id="vocabularyContainer">
+            <!-- Unit 3 -->
+            <div class="unit-section" data-unit="unit3">
+                <div class="unit-header">Unit 3: 天気と未来の表現 (78語)</div>
+                <div class="unit-content">
+                    <div class="vocabulary-grid" id="unit3Grid"></div>
+                </div>
+            </div>
+
+            <!-- Let's Read -->
+            <div class="unit-section" data-unit="lets-read">
+                <div class="unit-header">Let's Read: スーホの白い馬 (76語)</div>
+                <div class="unit-content">
+                    <div class="vocabulary-grid" id="letsReadGrid"></div>
+                </div>
+            </div>
+
+            <!-- Unit 4 -->
+            <div class="unit-section" data-unit="unit4">
+                <div class="unit-header">Unit 4: 観光案内 (20語)</div>
+                <div class="unit-content">
+                    <div class="vocabulary-grid" id="unit4Grid"></div>
+                </div>
+            </div>
+
+            <!-- Unit 5 -->
+            <div class="unit-section" data-unit="unit5">
+                <div class="unit-header">Unit 5: 防災訓練 (69語)</div>
+                <div class="unit-content">
+                    <div class="vocabulary-grid" id="unit5Grid"></div>
+                </div>
+            </div>
+
+            <!-- Unit 6 -->
+            <div class="unit-section" data-unit="unit6">
+                <div class="unit-header">Unit 6: 職場体験 (62語)</div>
+                <div class="unit-content">
+                    <div class="vocabulary-grid" id="unit6Grid"></div>
+                </div>
+            </div>
+
+            <!-- Daily Life -->
+            <div class="unit-section" data-unit="daily">
+                <div class="unit-header">Daily Life: 日常会話・アナウンス (49語)</div>
+                <div class="unit-content">
+                    <div class="vocabulary-grid" id="dailyGrid"></div>
+                </div>
+            </div>
+
+            <!-- その他 -->
+            <div class="unit-section" data-unit="other">
+                <div class="unit-header">その他: 文法・表現・補助教材 (33語)</div>
+                <div class="unit-content">
+                    <div class="vocabulary-grid" id="otherGrid"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📖 テスト対策に活用してください</p>
+            <p>💡 検索機能を使って効率的に学習しましょう</p>
+            <p>🎯 387語すべてを網羅した完全版です</p>
+        </div>
+    </div>
+
+    <script>
+        // 完全な単語データ（387語）
+        const vocabularyData = [
+            // Unit 3: 天気と未来の表現 (78語)
+            { word: "weather", pronunciation: "[wéðər]", meaning: "天気、天候", unit: "unit3", number: 1 },
+            { word: "cloud", pronunciation: "[klaʊd]", meaning: "雲", unit: "unit3", number: 2 },
+            { word: "cloudy", pronunciation: "[kláʊdi]", meaning: "曇りの", unit: "unit3", number: 3 },
+            { word: "rain", pronunciation: "[reɪn]", meaning: "雨", unit: "unit3", number: 4 },
+            { word: "rainy", pronunciation: "[réɪni]", meaning: "雨の、雨降りの", unit: "unit3", number: 5 },
+            { word: "snow", pronunciation: "[snoʊ]", meaning: "雪", unit: "unit3", number: 6 },
+            { word: "snowy", pronunciation: "[snóʊi]", meaning: "雪の、雪の降る", unit: "unit3", number: 7 },
+            { word: "wind", pronunciation: "[wɪnd]", meaning: "風", unit: "unit3", number: 8 },
+            { word: "windy", pronunciation: "[wɪ́ndi]", meaning: "風の強い、風のある", unit: "unit3", number: 9 },
+            { word: "sunny", pronunciation: "[sʌ́ni]", meaning: "晴れた", unit: "unit3", number: 10 },
+            { word: "forecast", pronunciation: "[fɔ́ːrkæst]", meaning: "予報", unit: "unit3", number: 11 },
+            { word: "passenger", pronunciation: "[pǽsəndʒər]", meaning: "乗客、旅客", unit: "unit3", number: 12 },
+            { word: "passengers", pronunciation: "[pǽsəndʒərz]", meaning: "乗客たち", unit: "unit3", number: 13 },
+            { word: "flying", pronunciation: "[fláɪɪŋ]", meaning: "飛んでいる", unit: "unit3", number: 14 },
+            { word: "boarding", pronunciation: "[bɔ́ːrdɪŋ]", meaning: "搭乗", unit: "unit3", number: 15 },
+            { word: "gate", pronunciation: "[geɪt]", meaning: "ゲート、搭乗口", unit: "unit3", number: 16 },
+            { word: "flight attendant", pronunciation: "[flaɪt əténdənt]", meaning: "客室乗務員", unit: "unit3", number: 17 },
+            { word: "airport", pronunciation: "[érpɔːrt]", meaning: "空港", unit: "unit3", number: 18 },
+            { word: "the Big Apple", pronunciation: "[ðə bɪ́g æpl]", meaning: "ニューヨーク市の愛称", unit: "unit3", number: 19 },
+            { word: "believe", pronunciation: "[bɪlíːv]", meaning: "～を信じる", unit: "unit3", number: 20 },
+            { word: "can't believe", pronunciation: "[kænt bɪlíːv]", meaning: "信じられない", unit: "unit3", number: 21 },
+            { word: "suitcase", pronunciation: "[súːtkeɪs]", meaning: "スーツケース", unit: "unit3", number: 22 },
+            { word: "car", pronunciation: "[kɑːr]", meaning: "車", unit: "unit3", number: 23 },
+            { word: "OK", pronunciation: "[oʊkéɪ]", meaning: "よろしいですか", unit: "unit3", number: 24 },
+            { word: "if", pronunciation: "[ɪf]", meaning: "もし～ならば", unit: "unit3", number: 25 },
+            { word: "tired", pronunciation: "[táɪərd]", meaning: "疲れた", unit: "unit3", number: 26 },
+            { word: "drive", pronunciation: "[draɪv]", meaning: "車で行く、運転する", unit: "unit3", number: 27 },
+            { word: "straight", pronunciation: "[streɪt]", meaning: "まっすぐに", unit: "unit3", number: 28 },
+            { word: "home", pronunciation: "[hoʊm]", meaning: "家", unit: "unit3", number: 29 },
+            { word: "fine", pronunciation: "[faɪn]", meaning: "大丈夫", unit: "unit3", number: 30 },
+            { word: "hungry", pronunciation: "[hʌ́ŋgri]", meaning: "お腹が空いた", unit: "unit3", number: 31 },
+            { word: "go for", pronunciation: "[goʊ fɔːr]", meaning: "～を求めて行く", unit: "unit3", number: 32 },
+            { word: "pizza", pronunciation: "[píːtsə]", meaning: "ピザ", unit: "unit3", number: 33 },
+            { word: "way", pronunciation: "[weɪ]", meaning: "道、通り道", unit: "unit3", number: 34 },
+            { word: "on the way", pronunciation: "[ɔn ðə weɪ]", meaning: "途中で", unit: "unit3", number: 35 },
+            { word: "sounds", pronunciation: "[saʊndz]", meaning: "～のように聞こえる", unit: "unit3", number: 36 },
+            { word: "great", pronunciation: "[greɪt]", meaning: "すばらしい", unit: "unit3", number: 37 },
+            { word: "starving", pronunciation: "[stáːrvɪŋ]", meaning: "非常に空腹な", unit: "unit3", number: 38 },
+            { word: "central", pronunciation: "[séntrəl]", meaning: "中央にある", unit: "unit3", number: 39 },
+            { word: "Central Park", pronunciation: "[séntrəl pɑːrk]", meaning: "セントラルパーク", unit: "unit3", number: 40 },
+            { word: "theater", pronunciation: "[θíːətər]", meaning: "劇場", unit: "unit3", number: 41 },
+            { word: "museum", pronunciation: "[mjuːzíːəm]", meaning: "博物館、美術館", unit: "unit3", number: 42 },
+            { word: "museums", pronunciation: "[mjuːzíːəmz]", meaning: "博物館、美術館（複数）", unit: "unit3", number: 43 },
+            { word: "SoHo", pronunciation: "[sóʊhoʊ]", meaning: "ソーホー", unit: "unit3", number: 44 },
+            { word: "Statue of Liberty", pronunciation: "[stǽtʃuː əv lɪ́bərti]", meaning: "自由の女神", unit: "unit3", number: 45 },
+            { word: "have a picnic", pronunciation: "[hæv ə pɪ́knɪk]", meaning: "ピクニックをする", unit: "unit3", number: 46 },
+            { word: "be going to", pronunciation: "[bi góʊɪŋ tu]", meaning: "～するつもり", unit: "unit3", number: 47 },
+            { word: "will", pronunciation: "[wɪl]", meaning: "～でしょう（未来）", unit: "unit3", number: 48 },
+            { word: "by the way", pronunciation: "[baɪ ðə weɪ]", meaning: "ところで", unit: "unit3", number: 49 },
+            { word: "take care", pronunciation: "[teɪk ker]", meaning: "じゃあ、またね", unit: "unit3", number: 50 },
+            { word: "practice", pronunciation: "[prǽktɪs]", meaning: "練習する", unit: "unit3", number: 51 },
+            { word: "soccer", pronunciation: "[sɑ́kər]", meaning: "サッカー", unit: "unit3", number: 52 },
+            { word: "together", pronunciation: "[təgéðər]", meaning: "いっしょに", unit: "unit3", number: 53 },
+            { word: "park", pronunciation: "[pɑːrk]", meaning: "公園", unit: "unit3", number: 54 },
+            { word: "birthday", pronunciation: "[bə́ːrθdeɪ]", meaning: "誕生日", unit: "unit3", number: 55 },
+            { word: "shopping", pronunciation: "[ʃɑ́pɪŋ]", meaning: "買い物", unit: "unit3", number: 56 },
+            { word: "present", pronunciation: "[préznt]", meaning: "プレゼント", unit: "unit3", number: 57 },
+            { word: "basketball", pronunciation: "[bǽskɪtbɔːl]", meaning: "バスケットボール", unit: "unit3", number: 58 },
+            { word: "gymnasium", pronunciation: "[dʒɪmnéɪziəm]", meaning: "体育館", unit: "unit3", number: 59 },
+            { word: "important", pronunciation: "[ɪmpɔ́ːrtənt]", meaning: "重要な", unit: "unit3", number: 60 },
+            { word: "e-mail", pronunciation: "[íːmeɪl]", meaning: "Eメール", unit: "unit3", number: 61 },
+            { word: "tonight", pronunciation: "[tənáɪt]", meaning: "今夜、今晩", unit: "unit3", number: 62 },
+            { word: "borrow", pronunciation: "[bɑ́roʊ]", meaning: "～を借りる", unit: "unit3", number: 63 },
+            { word: "hat", pronunciation: "[hæt]", meaning: "帽子", unit: "unit3", number: 64 },
+            { word: "take", pronunciation: "[teɪk]", meaning: "～を連れていく", unit: "unit3", number: 65 },
+            { word: "clothes", pronunciation: "[kloʊz]", meaning: "衣服", unit: "unit3", number: 66 },
+            { word: "shop", pronunciation: "[ʃɑp]", meaning: "店", unit: "unit3", number: 67 },
+            { word: "p.m.", pronunciation: "[piːém]", meaning: "午後", unit: "unit3", number: 68 },
+            { word: "as", pronunciation: "[æz]", meaning: "～として", unit: "unit3", number: 69 },
+            { word: "for", pronunciation: "[fɔːr]", meaning: "～への", unit: "unit3", number: 70 },
+            { word: "souvenir", pronunciation: "[suːvənɪ́ər]", meaning: "土産", unit: "unit3", number: 71 },
+            { word: "souvenirs", pronunciation: "[suːvənɪ́ərz]", meaning: "土産（複数）", unit: "unit3", number: 72 },
+            { word: "information", pronunciation: "[ɪnfərméɪʃən]", meaning: "情報", unit: "unit3", number: 73 },
+            { word: "laughing", pronunciation: "[læfɪŋ]", meaning: "笑っている", unit: "unit3", number: 74 },
+            { word: "loud", pronunciation: "[laʊd]", meaning: "大きな声で", unit: "unit3", number: 75 },
+            { word: "take～to", pronunciation: "[teɪk tu]", meaning: "～を…へ連れていく", unit: "unit3", number: 76 },
+            { word: "arrive at", pronunciation: "[əráɪv æt]", meaning: "～に着く", unit: "unit3", number: 77 },
+            { word: "See you soon", pronunciation: "[siː juː suːn]", meaning: "また近いうちに", unit: "unit3", number: 78 },
+
+            // Let's Read: スーホの白い馬 (76語)
+            { word: "Sukh", pronunciation: "[suːk]", meaning: "スーホ（男性の名）", unit: "lets-read", number: 79 },
+            { word: "once", pronunciation: "[wʌns]", meaning: "かつて、昔", unit: "lets-read", number: 80 },
+            { word: "once upon a time", pronunciation: "[wʌns əpɔ́n ə taɪm]", meaning: "昔々", unit: "lets-read", number: 81 },
+            { word: "upon", pronunciation: "[əpɔ́n]", meaning: "～に", unit: "lets-read", number: 82 },
+            { word: "poor", pronunciation: "[pʊr]", meaning: "貧しい", unit: "lets-read", number: 83 },
+            { word: "boy", pronunciation: "[bɔɪ]", meaning: "男の子、少年", unit: "lets-read", number: 84 },
+            { word: "Mongolia", pronunciation: "[mɑŋgoʊ́liə]", meaning: "モンゴル", unit: "lets-read", number: 85 },
+            { word: "find", pronunciation: "[faɪnd]", meaning: "～を見つける", unit: "lets-read", number: 86 },
+            { word: "found", pronunciation: "[faʊnd]", meaning: "findの過去形", unit: "lets-read", number: 87 },
+            { word: "baby", pronunciation: "[béɪbi]", meaning: "赤ちゃん", unit: "lets-read", number: 88 },
+            { word: "horse", pronunciation: "[hɔːrs]", meaning: "馬", unit: "lets-read", number: 89 },
+            { word: "white", pronunciation: "[waɪt]", meaning: "白い", unit: "lets-read", number: 90 },
+            { word: "grow", pronunciation: "[groʊ]", meaning: "成長する", unit: "lets-read", number: 91 },
+            { word: "grew", pronunciation: "[gruː]", meaning: "growの過去形", unit: "lets-read", number: 92 },
+            { word: "grow up", pronunciation: "[groʊ ʌp]", meaning: "成長する", unit: "lets-read", number: 93 },
+            { word: "take care of", pronunciation: "[teɪk ker əv]", meaning: "～の世話をする", unit: "lets-read", number: 94 },
+            { word: "ruler", pronunciation: "[rúːlər]", meaning: "統治者", unit: "lets-read", number: 95 },
+            { word: "race", pronunciation: "[reɪs]", meaning: "競走、レース", unit: "lets-read", number: 96 },
+            { word: "say", pronunciation: "[seɪ]", meaning: "～を言う", unit: "lets-read", number: 97 },
+            { word: "said", pronunciation: "[sed]", meaning: "sayの過去形", unit: "lets-read", number: 98 },
+            { word: "winner", pronunciation: "[wɪ́nər]", meaning: "勝利者", unit: "lets-read", number: 99 },
+            { word: "marry", pronunciation: "[mǽri]", meaning: "～と結婚する", unit: "lets-read", number: 100 },
+            { word: "daughter", pronunciation: "[dɔ́ːtər]", meaning: "娘", unit: "lets-read", number: 101 },
+            { word: "take part in", pronunciation: "[teɪk pɑːrt ɪn]", meaning: "～に参加する", unit: "lets-read", number: 102 },
+            { word: "part", pronunciation: "[pɑːrt]", meaning: "一部分", unit: "lets-read", number: 103 },
+            { word: "town", pronunciation: "[taʊn]", meaning: "町", unit: "lets-read", number: 104 },
+            { word: "begin", pronunciation: "[bɪgɪ́n]", meaning: "始まる", unit: "lets-read", number: 105 },
+            { word: "began", pronunciation: "[bɪgǽn]", meaning: "beginの過去形", unit: "lets-read", number: 106 },
+            { word: "run", pronunciation: "[rʌn]", meaning: "走る", unit: "lets-read", number: 107 },
+            { word: "ran", pronunciation: "[ræn]", meaning: "runの過去形", unit: "lets-read", number: 108 },
+            { word: "get on", pronunciation: "[get ɔn]", meaning: "～に乗る", unit: "lets-read", number: 109 },
+            { word: "lead", pronunciation: "[liːd]", meaning: "先頭、首位", unit: "lets-read", number: 110 },
+            { word: "cry", pronunciation: "[kraɪ]", meaning: "～を叫ぶ", unit: "lets-read", number: 111 },
+            { word: "silver", pronunciation: "[sɪ́lvər]", meaning: "銀貨", unit: "lets-read", number: 112 },
+            { word: "leave", pronunciation: "[liːv]", meaning: "～を置いていく", unit: "lets-read", number: 113 },
+            { word: "stupid", pronunciation: "[stúːpɪd]", meaning: "愚かな", unit: "lets-read", number: 114 },
+            { word: "man", pronunciation: "[mæn]", meaning: "男の部下", unit: "lets-read", number: 115 },
+            { word: "men", pronunciation: "[men]", meaning: "manの複数形", unit: "lets-read", number: 116 },
+            { word: "beat", pronunciation: "[biːt]", meaning: "～を打つ、たたく", unit: "lets-read", number: 117 },
+            { word: "go home", pronunciation: "[goʊ hoʊm]", meaning: "帰宅する", unit: "lets-read", number: 118 },
+            { word: "kicked", pronunciation: "[kɪkt]", meaning: "蹴った", unit: "lets-read", number: 119 },
+            { word: "take away from", pronunciation: "[teɪk əweɪ frʌm]", meaning: "～から取り上げる", unit: "lets-read", number: 120 },
+            { word: "ride", pronunciation: "[raɪd]", meaning: "乗る", unit: "lets-read", number: 121 },
+            { word: "ride on", pronunciation: "[raɪd ɔn]", meaning: "～に乗る", unit: "lets-read", number: 122 },
+            { word: "happened", pronunciation: "[hǽpənd]", meaning: "起こった", unit: "lets-read", number: 123 },
+            { word: "leaped", pronunciation: "[liːpt]", meaning: "跳んだ", unit: "lets-read", number: 124 },
+            { word: "fall", pronunciation: "[fɔːl]", meaning: "落ちる", unit: "lets-read", number: 125 },
+            { word: "fell", pronunciation: "[fel]", meaning: "fallの過去形", unit: "lets-read", number: 126 },
+            { word: "fall off", pronunciation: "[fɔːl ɔːf]", meaning: "～から落ちる", unit: "lets-read", number: 127 },
+            { word: "run away", pronunciation: "[rʌn əweɪ]", meaning: "逃げる", unit: "lets-read", number: 128 },
+            { word: "quick", pronunciation: "[kwɪk]", meaning: "すばやく", unit: "lets-read", number: 129 },
+            { word: "shoot", pronunciation: "[ʃuːt]", meaning: "撃つ、射る", unit: "lets-read", number: 130 },
+            { word: "shot", pronunciation: "[ʃɑt]", meaning: "shootの過去形", unit: "lets-read", number: 131 },
+            { word: "arrows", pronunciation: "[ǽroʊz]", meaning: "矢（複数）", unit: "lets-read", number: 132 },
+            { word: "keep", pronunciation: "[kiːp]", meaning: "～を続ける", unit: "lets-read", number: 133 },
+            { word: "keep on", pronunciation: "[kiːp ɔn]", meaning: "～し続ける", unit: "lets-read", number: 134 },
+            { word: "sound", pronunciation: "[saʊnd]", meaning: "音、物音", unit: "lets-read", number: 135 },
+            { word: "outside", pronunciation: "[aʊtsáɪd]", meaning: "外に", unit: "lets-read", number: 136 },
+            { word: "injured", pronunciation: "[ɪ́ndʒərd]", meaning: "傷ついた", unit: "lets-read", number: 137 },
+            { word: "die", pronunciation: "[daɪ]", meaning: "死ぬ", unit: "lets-read", number: 138 },
+            { word: "could", pronunciation: "[kʊd]", meaning: "～することができた", unit: "lets-read", number: 139 },
+            { word: "then", pronunciation: "[ðen]", meaning: "それから", unit: "lets-read", number: 140 },
+            { word: "finally", pronunciation: "[faɪ́nəli]", meaning: "ついに", unit: "lets-read", number: 141 },
+            { word: "sleep", pronunciation: "[sliːp]", meaning: "眠る", unit: "lets-read", number: 142 },
+            { word: "slept", pronunciation: "[slept]", meaning: "sleepの過去形", unit: "lets-read", number: 143 },
+            { word: "dreamed", pronunciation: "[driːmd]", meaning: "夢を見た", unit: "lets-read", number: 144 },
+            { word: "musical", pronunciation: "[mjúːzɪkəl]", meaning: "音楽の", unit: "lets-read", number: 145 },
+            { word: "bones", pronunciation: "[boʊnz]", meaning: "骨（複数）", unit: "lets-read", number: 146 },
+            { word: "hair", pronunciation: "[her]", meaning: "毛、髪の毛", unit: "lets-read", number: 147 },
+            { word: "horsehead rebec", pronunciation: "[hɔ́ːrshed rɪ́bek]", meaning: "馬頭琴", unit: "lets-read", number: 148 },
+            { word: "feel", pronunciation: "[fiːl]", meaning: "～だと感じる", unit: "lets-read", number: 149 },
+            { word: "felt", pronunciation: "[felt]", meaning: "feelの過去形", unit: "lets-read", number: 150 },
+            { word: "moved", pronunciation: "[muːvd]", meaning: "感動させた", unit: "lets-read", number: 151 },
+            { word: "hearts", pronunciation: "[hɑːrts]", meaning: "心（複数）", unit: "lets-read", number: 152 },
+            { word: "all", pronunciation: "[ɔːl]", meaning: "全ての", unit: "lets-read", number: 153 },
+            { word: "make out of", pronunciation: "[meɪk aʊt əv]", meaning: "...から～を作る", unit: "lets-read", number: 154 },
+
+            // その他: Your Coach & World Tour (33語)
+            { word: "conscious", pronunciation: "[kɑ́nʃəs]", meaning: "意識的な", unit: "other", number: 155 },
+            { word: "pattern", pronunciation: "[pǽtərn]", meaning: "パターン", unit: "other", number: 156 },
+            { word: "relationship", pronunciation: "[rɪléɪʃənʃɪp]", meaning: "関係", unit: "other", number: 157 },
+            { word: "topic", pronunciation: "[tɑ́pɪk]", meaning: "トピック、話題", unit: "other", number: 158 },
+            { word: "specific", pronunciation: "[spəsɪ́fɪk]", meaning: "具体的な", unit: "other", number: 159 },
+            { word: "date", pronunciation: "[deɪt]", meaning: "日付", unit: "other", number: 160 },
+            { word: "visual", pronunciation: "[vɪ́ʒuəl]", meaning: "視覚的な", unit: "other", number: 161 },
+            { word: "flow", pronunciation: "[floʊ]", meaning: "流れ", unit: "other", number: 162 },
+            { word: "movement", pronunciation: "[múːvmənt]", meaning: "動き", unit: "other", number: 163 },
+            { word: "order", pronunciation: "[ɔ́ːrdər]", meaning: "順序", unit: "other", number: 164 },
+            { word: "verb", pronunciation: "[vɜːrb]", meaning: "動詞", unit: "other", number: 165 },
+            { word: "adjective", pronunciation: "[ǽdʒɪktɪv]", meaning: "形容詞", unit: "other", number: 166 },
+            { word: "structure", pronunciation: "[strʌ́ktʃər]", meaning: "構造", unit: "other", number: 167 },
+            { word: "first", pronunciation: "[fɜːrst]", meaning: "まず第一に", unit: "other", number: 168 },
+            { word: "second", pronunciation: "[sékənd]", meaning: "2番目の", unit: "other", number: 169 },
+            { word: "next", pronunciation: "[nekst]", meaning: "次に", unit: "other", number: 170 },
+            { word: "temperature", pronunciation: "[témpərətʃər]", meaning: "気温、温度", unit: "other", number: 171 },
+            { word: "Fahrenheit", pronunciation: "[fǽrənhaɪt]", meaning: "華氏", unit: "other", number: 172 },
+            { word: "Celsius", pronunciation: "[sélsiəs]", meaning: "摂氏", unit: "other", number: 173 },
+            { word: "quantity", pronunciation: "[kwɑ́ntəti]", meaning: "量", unit: "other", number: 174 },
+            { word: "fluid ounce", pronunciation: "[flúːɪd aʊns]", meaning: "液量オンス", unit: "other", number: 175 },
+            { word: "milliliter", pronunciation: "[mɪ́ləliːtər]", meaning: "ミリリットル", unit: "other", number: 176 },
+            { word: "length", pronunciation: "[leŋθ]", meaning: "長さ", unit: "other", number: 177 },
+            { word: "foot", pronunciation: "[fʊt]", meaning: "フィート", unit: "other", number: 178 },
+            { word: "feet", pronunciation: "[fiːt]", meaning: "フィート（複数）", unit: "other", number: 179 },
+            { word: "meter", pronunciation: "[míːtər]", meaning: "メートル", unit: "other", number: 180 },
+            { word: "price", pronunciation: "[praɪs]", meaning: "価格", unit: "other", number: 181 },
+            { word: "dollar", pronunciation: "[dɑ́lər]", meaning: "ドル", unit: "other", number: 182 },
+            { word: "yen", pronunciation: "[jen]", meaning: "円", unit: "other", number: 183 },
+            { word: "dinosaur", pronunciation: "[daɪ́nəsɔːr]", meaning: "恐竜", unit: "other", number: 184 },
+            { word: "fossil", pronunciation: "[fɑ́səl]", meaning: "化石", unit: "other", number: 185 },
+            { word: "collection", pronunciation: "[kəlékʃən]", meaning: "コレクション", unit: "other", number: 186 },
+            { word: "Tyrannosaurus rex", pronunciation: "[taɪrænəsɔ́ːrəs reks]", meaning: "ティラノサウルス・レックス", unit: "other", number: 187 },
+
+            // Unit 4: 観光案内 (20語)
+            { word: "oasis", pronunciation: "[oʊéɪsɪs]", meaning: "憩いの場", unit: "unit4", number: 188 },
+            { word: "center", pronunciation: "[séntər]", meaning: "中心、真ん中", unit: "unit4", number: 189 },
+            { word: "nature", pronunciation: "[néɪtʃər]", meaning: "自然", unit: "unit4", number: 190 },
+            { word: "rent", pronunciation: "[rent]", meaning: "～を借りる", unit: "unit4", number: 191 },
+            { word: "example", pronunciation: "[ɪgzǽmpəl]", meaning: "例", unit: "unit4", number: 192 },
+            { word: "ice skating rink", pronunciation: "[aɪs skeɪtɪŋ rɪŋk]", meaning: "アイススケートリンク", unit: "unit4", number: 193 },
+            { word: "such", pronunciation: "[sʌtʃ]", meaning: "そのような", unit: "unit4", number: 194 },
+            { word: "lovers", pronunciation: "[lʌ́vərz]", meaning: "愛好者たち", unit: "unit4", number: 195 },
+            { word: "carriage", pronunciation: "[kǽrɪdʒ]", meaning: "馬車", unit: "unit4", number: 196 },
+            { word: "first of all", pronunciation: "[fɜːrst əv ɔːl]", meaning: "まず第一に", unit: "unit4", number: 197 },
+            { word: "for example", pronunciation: "[fɔːr ɪgzǽmpəl]", meaning: "例えば", unit: "unit4", number: 198 },
+            { word: "such as", pronunciation: "[sʌtʃ æz]", meaning: "たとえば", unit: "unit4", number: 199 },
+            { word: "the Metropolitan Museum of Art", pronunciation: "[ðə metrəpɑ́lətən mjuːzíːəm əv ɑːrt]", meaning: "メトロポリタン美術館", unit: "unit4", number: 200 },
+            { word: "free", pronunciation: "[friː]", meaning: "無料の", unit: "unit4", number: 201 },
+            { word: "concerts", pronunciation: "[kɑ́nsərts]", meaning: "コンサート（複数）", unit: "unit4", number: 202 },
+            { word: "mosaic", pronunciation: "[moʊzéɪɪk]", meaning: "モザイク画", unit: "unit4", number: 203 },
+            { word: "Strawberry Fields", pronunciation: "[strɔ́ːberi fiːldz]", meaning: "ストロベリー・フィールズ", unit: "unit4", number: 204 },
+            { word: "attractions", pronunciation: "[ətrǽkʃənz]", meaning: "魅力あるもの（複数）", unit: "unit4", number: 205 },
+            { word: "jogging", pronunciation: "[dʒɑ́gɪŋ]", meaning: "ジョギング", unit: "unit4", number: 206 },
+            { word: "give", pronunciation: "[gɪv]", meaning: "～を与える", unit: "unit4", number: 207 },
+
+            // Daily Life: 道案内・体調不良・アナウンス (49語)
+            { word: "excuse", pronunciation: "[ɪkskjúːz]", meaning: "～を許す", unit: "daily", number: 208 },
+            { word: "off", pronunciation: "[ɔːf]", meaning: "離れて", unit: "daily", number: 209 },
+            { word: "street", pronunciation: "[striːt]", meaning: "通り、街", unit: "daily", number: 210 },
+            { word: "along", pronunciation: "[əlɔ́ŋ]", meaning: "～に沿って", unit: "daily", number: 211 },
+            { word: "left", pronunciation: "[left]", meaning: "左", unit: "daily", number: 212 },
+            { word: "Excuse me", pronunciation: "[ɪkskjúːz miː]", meaning: "すみません", unit: "daily", number: 213 },
+            { word: "Could you", pronunciation: "[kʊd juː]", meaning: "～していただけませんか", unit: "daily", number: 214 },
+            { word: "get off", pronunciation: "[get ɔːf]", meaning: "降りる", unit: "daily", number: 215 },
+            { word: "get to", pronunciation: "[get tuː]", meaning: "～に着く", unit: "daily", number: 216 },
+            { word: "near here", pronunciation: "[nɪr hɪr]", meaning: "この近く", unit: "daily", number: 217 },
+            { word: "How long", pronunciation: "[haʊ lɔːŋ]", meaning: "どのくらい", unit: "daily", number: 218 },
+            { word: "You're welcome", pronunciation: "[jʊr wélkəm]", meaning: "どういたしまして", unit: "daily", number: 219 },
+            { word: "gave", pronunciation: "[geɪv]", meaning: "giveの過去形", unit: "daily", number: 220 },
+            { word: "send", pronunciation: "[send]", meaning: "～を送る", unit: "daily", number: 221 },
+            { word: "attention", pronunciation: "[əténʃən]", meaning: "注意、注目", unit: "daily", number: 222 },
+            { word: "inconvenience", pronunciation: "[ɪnkənvíːniəns]", meaning: "不便、迷惑", unit: "daily", number: 223 },
+            { word: "welcome aboard", pronunciation: "[wélkəm əbɔ́ːrd]", meaning: "～へようこそ", unit: "daily", number: 224 },
+            { word: "baggage", pronunciation: "[bǽgɪdʒ]", meaning: "手荷物", unit: "daily", number: 225 },
+            { word: "overhead compartment", pronunciation: "[óʊvərhed kəmpɑ́ːrtmənt]", meaning: "頭上のコンパートメント", unit: "daily", number: 226 },
+            { word: "seat", pronunciation: "[siːt]", meaning: "座席", unit: "daily", number: 227 },
+            { word: "electronic device", pronunciation: "[ɪlektrɑ́nɪk dɪváɪs]", meaning: "電子機器", unit: "daily", number: 228 },
+            { word: "take-off", pronunciation: "[téɪkɔːf]", meaning: "離陸", unit: "daily", number: 229 },
+            { word: "fasten", pronunciation: "[fæsən]", meaning: "締める", unit: "daily", number: 230 },
+            { word: "seat belt", pronunciation: "[siːt belt]", meaning: "シートベルト", unit: "daily", number: 231 },
+            { word: "refrain from", pronunciation: "[rɪfréɪn frʌm]", meaning: "～を控える", unit: "daily", number: 232 },
+            { word: "lavatory", pronunciation: "[lǽvətɔːri]", meaning: "お手洗い", unit: "daily", number: 233 },
+            { word: "flight time", pronunciation: "[flaɪt taɪm]", meaning: "飛行時間", unit: "daily", number: 234 },
+            { word: "captain", pronunciation: "[kǽptən]", meaning: "機長", unit: "daily", number: 235 },
+            { word: "local time", pronunciation: "[lóʊkəl taɪm]", meaning: "現地時間", unit: "daily", number: 236 },
+            { word: "pale", pronunciation: "[peɪl]", meaning: "青白い", unit: "daily", number: 237 },
+            { word: "sick", pronunciation: "[sɪk]", meaning: "病気の", unit: "daily", number: 238 },
+            { word: "mm", pronunciation: "[mm]", meaning: "うむ", unit: "daily", number: 239 },
+            { word: "headache", pronunciation: "[hédˌeɪk]", meaning: "頭痛", unit: "daily", number: 240 },
+            { word: "medicine", pronunciation: "[médəsən]", meaning: "薬", unit: "daily", number: 241 },
+            { word: "achoo", pronunciation: "[ətʃúː]", meaning: "ハクション", unit: "daily", number: 242 },
+            { word: "club meeting", pronunciation: "[klʌb míːtɪŋ]", meaning: "部活動のミーティング", unit: "daily", number: 243 },
+            { word: "take it easy", pronunciation: "[teɪk ɪt íːzi]", meaning: "無理をしないで", unit: "daily", number: 244 },
+            { word: "explain", pronunciation: "[ɪkspléɪn]", meaning: "～を説明する", unit: "daily", number: 245 },
+            { word: "situation", pronunciation: "[sɪtʃuéɪʃən]", meaning: "状況", unit: "daily", number: 246 },
+            { word: "feel sick", pronunciation: "[fiːl sɪk]", meaning: "具合が悪い", unit: "daily", number: 247 },
+            { word: "fever", pronunciation: "[fíːvər]", meaning: "熱", unit: "daily", number: 248 },
+            { word: "cut", pronunciation: "[kʌt]", meaning: "切る", unit: "daily", number: 249 },
+            { word: "finger", pronunciation: "[fɪ́ŋgər]", meaning: "指", unit: "daily", number: 250 },
+            { word: "knife", pronunciation: "[naɪf]", meaning: "ナイフ、包丁", unit: "daily", number: 251 },
+            { word: "see a doctor", pronunciation: "[siː ə dɑ́ktər]", meaning: "医者に診てもらう", unit: "daily", number: 252 },
+            { word: "hurt", pronunciation: "[hɜːrt]", meaning: "痛む", unit: "daily", number: 253 },
+            { word: "take medicine", pronunciation: "[teɪk médəsən]", meaning: "薬を飲む", unit: "daily", number: 254 },
+            { word: "related", pronunciation: "[rɪléɪtɪd]", meaning: "関連する", unit: "daily", number: 255 },
+            { word: "gradually", pronunciation: "[grǽdʒuəli]", meaning: "少しずつ", unit: "daily", number: 256 },
+
+            // Unit 5: 防災訓練 (69語)
+            { word: "earthquake", pronunciation: "[ə́ːrθkweɪk]", meaning: "地震", unit: "unit5", number: 257 },
+            { word: "drill", pronunciation: "[drɪl]", meaning: "訓練", unit: "unit5", number: 258 },
+            { word: "safety", pronunciation: "[séɪfti]", meaning: "安全、安全性", unit: "unit5", number: 259 },
+            { word: "actions", pronunciation: "[ǽkʃənz]", meaning: "行動（複数）", unit: "unit5", number: 260 },
+            { word: "learn", pronunciation: "[lɜːrn]", meaning: "～を学ぶ", unit: "unit5", number: 261 },
+            { word: "group", pronunciation: "[gruːp]", meaning: "集団、グループ", unit: "unit5", number: 262 },
+            { word: "discussion", pronunciation: "[dɪskʌ́ʃən]", meaning: "議論、討論", unit: "unit5", number: 263 },
+            { word: "get down", pronunciation: "[get daʊn]", meaning: "かがむ、伏せる", unit: "unit5", number: 264 },
+            { word: "down", pronunciation: "[daʊn]", meaning: "下へ", unit: "unit5", number: 265 },
+            { word: "shake", pronunciation: "[ʃeɪk]", meaning: "揺れる、振動する", unit: "unit5", number: 266 },
+            { word: "shaking", pronunciation: "[ʃeɪkɪŋ]", meaning: "揺れること", unit: "unit5", number: 267 },
+            { word: "post", pronunciation: "[poʊst]", meaning: "郵便", unit: "unit5", number: 268 },
+            { word: "post office", pronunciation: "[poʊst ɔ́ːfɪs]", meaning: "郵便局", unit: "unit5", number: 269 },
+            { word: "bathroom", pronunciation: "[bǽθruːm]", meaning: "浴室、トイレ", unit: "unit5", number: 270 },
+            { word: "close", pronunciation: "[kloʊz]", meaning: "閉じる、閉める", unit: "unit5", number: 271 },
+            { word: "door", pronunciation: "[dɔːr]", meaning: "ドア、戸", unit: "unit5", number: 272 },
+            { word: "quietly", pronunciation: "[kwaɪ́ətli]", meaning: "静かに", unit: "unit5", number: 273 },
+            { word: "iron", pronunciation: "[áɪərn]", meaning: "アイロンをかける", unit: "unit5", number: 274 },
+            { word: "hold", pronunciation: "[hoʊld]", meaning: "つかまる", unit: "unit5", number: 275 },
+            { word: "on", pronunciation: "[ɔn]", meaning: "しっかり", unit: "unit5", number: 276 },
+            { word: "both", pronunciation: "[boʊθ]", meaning: "両方の", unit: "unit5", number: 277 },
+            { word: "arms", pronunciation: "[ɑːrmz]", meaning: "腕（複数）", unit: "unit5", number: 278 },
+            { word: "quickly", pronunciation: "[kwɪ́kli]", meaning: "すぐに、即座に", unit: "unit5", number: 279 },
+            { word: "push", pronunciation: "[pʊʃ]", meaning: "押す", unit: "unit5", number: 280 },
+            { word: "must", pronunciation: "[mʌst]", meaning: "～しなければならない", unit: "unit5", number: 281 },
+            { word: "calm", pronunciation: "[kɑːm]", meaning: "冷静な、平静な", unit: "unit5", number: 282 },
+            { word: "instructions", pronunciation: "[ɪnstrʌ́kʃənz]", meaning: "指示、指図（複数）", unit: "unit5", number: 283 },
+            { word: "hold on", pronunciation: "[hoʊld ɔn]", meaning: "しがみつく", unit: "unit5", number: 284 },
+            { word: "knees", pronunciation: "[niːz]", meaning: "ひざ（複数）", unit: "unit5", number: 285 },
+            { word: "wall", pronunciation: "[wɔːl]", meaning: "壁", unit: "unit5", number: 286 },
+            { word: "stay away from", pronunciation: "[steɪ əweɪ frʌm]", meaning: "～から離れている", unit: "unit5", number: 287 },
+            { word: "head", pronunciation: "[hed]", meaning: "頭、頭部", unit: "unit5", number: 288 },
+            { word: "neck", pronunciation: "[nek]", meaning: "首", unit: "unit5", number: 289 },
+            { word: "keep safe", pronunciation: "[kiːp seɪf]", meaning: "身の安全を確保する", unit: "unit5", number: 290 },
+            { word: "from", pronunciation: "[frʌm]", meaning: "～から", unit: "unit5", number: 291 },
+            { word: "prepare", pronunciation: "[prɪpér]", meaning: "～を準備する", unit: "unit5", number: 292 },
+            { word: "preparing", pronunciation: "[prɪpérɪŋ]", meaning: "準備すること", unit: "unit5", number: 293 },
+            { word: "emergency", pronunciation: "[ɪmə́ːrdʒənsi]", meaning: "非常事態、緊急事態", unit: "unit5", number: 294 },
+            { word: "evacuation", pronunciation: "[ɪvækjuéɪʃən]", meaning: "避難", unit: "unit5", number: 295 },
+            { word: "useful", pronunciation: "[júːsfəl]", meaning: "役に立つ、有用な", unit: "unit5", number: 296 },
+            { word: "checklist", pronunciation: "[tʃéklɪst]", meaning: "チェックリスト", unit: "unit5", number: 297 },
+            { word: "should", pronunciation: "[ʃʊd]", meaning: "～すべきである", unit: "unit5", number: 298 },
+            { word: "flashlight", pronunciation: "[flǽʃlaɪt]", meaning: "懐中電灯", unit: "unit5", number: 299 },
+            { word: "whistle", pronunciation: "[hwɪ́səl]", meaning: "笛、ホイッスル", unit: "unit5", number: 300 },
+            { word: "Felix", pronunciation: "[fíːlɪks]", meaning: "フェリックス（猫の名）", unit: "unit5", number: 301 },
+            { word: "anime", pronunciation: "[ǽnəmeɪ]", meaning: "アニメ", unit: "unit5", number: 302 },
+            { word: "become", pronunciation: "[bɪkʌ́m]", meaning: "～になる", unit: "unit5", number: 303 },
+            { word: "member", pronunciation: "[mémbər]", meaning: "一員、メンバー", unit: "unit5", number: 304 },
+            { word: "broadcasting", pronunciation: "[brɔ́ːdkæstɪŋ]", meaning: "放送", unit: "unit5", number: 305 },
+            { word: "have to", pronunciation: "[hæv tuː]", meaning: "～する必要がある", unit: "unit5", number: 306 },
+            { word: "don't have to", pronunciation: "[doʊnt hæv tuː]", meaning: "～する必要がない", unit: "unit5", number: 307 },
+            { word: "must not", pronunciation: "[mʌst nɑt]", meaning: "～してはならない", unit: "unit5", number: 308 },
+            { word: "shouldn't", pronunciation: "[ʃʊdnt]", meaning: "～すべきではない", unit: "unit5", number: 309 },
+            { word: "towels", pronunciation: "[táʊəlz]", meaning: "タオル（複数）", unit: "unit5", number: 310 },
+            { word: "gloves", pronunciation: "[glʌvz]", meaning: "手袋（複数）", unit: "unit5", number: 311 },
+            { word: "reasons", pronunciation: "[ríːznz]", meaning: "理由（複数）", unit: "unit5", number: 312 },
+            { word: "volunteer", pronunciation: "[vɑlənˈtɪr]", meaning: "ボランティア", unit: "unit5", number: 313 },
+            { word: "Halloween", pronunciation: "[hæloʊíːn]", meaning: "ハロウィン", unit: "unit5", number: 314 },
+            { word: "party", pronunciation: "[pɑ́ːrti]", meaning: "パーティー", unit: "unit5", number: 315 },
+            { word: "activity", pronunciation: "[æktɪ́vəti]", meaning: "活動", unit: "unit5", number: 316 },
+            { word: "join", pronunciation: "[dʒɔɪn]", meaning: "参加する", unit: "unit5", number: 317 },
+            { word: "favorite", pronunciation: "[féɪvərɪt]", meaning: "お気に入りの", unit: "unit5", number: 318 },
+            { word: "schedule", pronunciation: "[skédʒuːl]", meaning: "スケジュール", unit: "unit5", number: 319 },
+            { word: "little brother", pronunciation: "[lɪ́təl brʌ́ðər]", meaning: "幼い弟", unit: "unit5", number: 320 },
+            { word: "afternoon", pronunciation: "[æftərnúːn]", meaning: "午後", unit: "unit5", number: 321 },
+            { word: "stay home", pronunciation: "[steɪ hoʊm]", meaning: "家にいる", unit: "unit5", number: 322 },
+            { word: "free time", pronunciation: "[friː taɪm]", meaning: "自由時間", unit: "unit5", number: 323 },
+            { word: "available", pronunciation: "[əvéɪləbəl]", meaning: "利用できる、空いている", unit: "unit5", number: 324 },
+            { word: "hunting", pronunciation: "[hʌ́ntɪŋ]", meaning: "狩りをする、狩猟する", unit: "unit5", number: 325 },
+
+            // Unit 6: 職場体験 (62語)
+            { word: "work", pronunciation: "[wɜːrk]", meaning: "仕事、業務、職場", unit: "unit6", number: 326 },
+            { word: "experience", pronunciation: "[ɪkspɪ́riəns]", meaning: "体験、経験", unit: "unit6", number: 327 },
+            { word: "through", pronunciation: "[θruː]", meaning: "～を通じて", unit: "unit6", number: 328 },
+            { word: "Ashim", pronunciation: "[ǽʃɪm]", meaning: "アシム（男性の名）", unit: "unit6", number: 329 },
+            { word: "here", pronunciation: "[hɪr]", meaning: "～するために", unit: "unit6", number: 330 },
+            { word: "help", pronunciation: "[help]", meaning: "手伝う", unit: "unit6", number: 331 },
+            { word: "Nepal", pronunciation: "[nəpɔ́ːl]", meaning: "ネパール", unit: "unit6", number: 332 },
+            { word: "kite", pronunciation: "[kaɪt]", meaning: "凧", unit: "unit6", number: 333 },
+            { word: "fly", pronunciation: "[flaɪ]", meaning: "飛ばす", unit: "unit6", number: 334 },
+            { word: "changa", pronunciation: "[tʃǽŋgə]", meaning: "チャンガ", unit: "unit6", number: 335 },
+            { word: "Nepali", pronunciation: "[nəpɔ́ːli]", meaning: "ネパール語", unit: "unit6", number: 336 },
+            { word: "during", pronunciation: "[djʊ́rɪŋ]", meaning: "～の間", unit: "unit6", number: 337 },
+            { word: "Dashain Festival", pronunciation: "[dəʃáɪn féstəvəl]", meaning: "ダサイン・フェスティバル", unit: "unit6", number: 338 },
+            { word: "interesting", pronunciation: "[ɪ́ntrəstɪŋ]", meaning: "おもしろい", unit: "unit6", number: 339 },
+            { word: "Japan", pronunciation: "[dʒəpǽn]", meaning: "日本", unit: "unit6", number: 340 },
+            { word: "shogatsu", pronunciation: "[ʃoʊgɑ́tsuː]", meaning: "正月", unit: "unit6", number: 341 },
+            { word: "New Year", pronunciation: "[nuː jɪr]", meaning: "新年", unit: "unit6", number: 342 },
+            { word: "nice", pronunciation: "[naɪs]", meaning: "すてきな", unit: "unit6", number: 343 },
+            { word: "girlfriend", pronunciation: "[gə́ːrlfrend]", meaning: "ガールフレンド", unit: "unit6", number: 344 },
+            { word: "read", pronunciation: "[riːd]", meaning: "読む", unit: "unit6", number: 345 },
+            { word: "manga", pronunciation: "[mǽŋgə]", meaning: "漫画", unit: "unit6", number: 346 },
+            { word: "Japanese", pronunciation: "[dʒæpəníːz]", meaning: "日本語", unit: "unit6", number: 347 },
+            { word: "talk", pronunciation: "[tɔːk]", meaning: "話す", unit: "unit6", number: 348 },
+            { word: "language", pronunciation: "[lǽŋgwɪdʒ]", meaning: "言語", unit: "unit6", number: 349 },
+            { word: "teacher", pronunciation: "[tíːtʃər]", meaning: "先生", unit: "unit6", number: 350 },
+            { word: "study", pronunciation: "[stʌ́di]", meaning: "勉強する", unit: "unit6", number: 351 },
+            { word: "English", pronunciation: "[ɪ́ŋglɪʃ]", meaning: "英語", unit: "unit6", number: 352 },
+            { word: "travel", pronunciation: "[trǽvəl]", meaning: "旅行する", unit: "unit6", number: 353 },
+            { word: "abroad", pronunciation: "[əbrɔ́ːd]", meaning: "外国に、海外に", unit: "unit6", number: 354 },
+            { word: "books", pronunciation: "[bʊks]", meaning: "本（複数）", unit: "unit6", number: 355 },
+            { word: "make friends", pronunciation: "[meɪk frends]", meaning: "友達になる", unit: "unit6", number: 356 },
+            { word: "over", pronunciation: "[óʊvər]", meaning: "～中で", unit: "unit6", number: 357 },
+            { word: "world", pronunciation: "[wɜːrld]", meaning: "世界", unit: "unit6", number: 358 },
+            { word: "sing", pronunciation: "[sɪŋ]", meaning: "歌う", unit: "unit6", number: 359 },
+            { word: "songs", pronunciation: "[sɔːŋz]", meaning: "歌（複数）", unit: "unit6", number: 360 },
+            { word: "Why", pronunciation: "[waɪ]", meaning: "なぜ", unit: "unit6", number: 361 },
+            { word: "How about you", pronunciation: "[haʊ əbaʊt juː]", meaning: "あなたはどうですか", unit: "unit6", number: 362 },
+            { word: "talk about", pronunciation: "[tɔːk əbaʊt]", meaning: "～について話す", unit: "unit6", number: 363 },
+            { word: "elementary school", pronunciation: "[eləméntəri skuːl]", meaning: "小学校", unit: "unit6", number: 364 },
+            { word: "helped", pronunciation: "[helpt]", meaning: "手伝った", unit: "unit6", number: 365 },
+            { word: "arts and crafts", pronunciation: "[ɑːrts ənd kræfts]", meaning: "図工、工芸", unit: "unit6", number: 366 },
+            { word: "class", pronunciation: "[klæs]", meaning: "授業", unit: "unit6", number: 367 },
+            { word: "students", pronunciation: "[stúːdənts]", meaning: "生徒たち", unit: "unit6", number: 368 },
+            { word: "made", pronunciation: "[meɪd]", meaning: "作った", unit: "unit6", number: 369 },
+            { word: "kites", pronunciation: "[kaɪts]", meaning: "凧（複数）", unit: "unit6", number: 370 },
+            { word: "student", pronunciation: "[stúːdənt]", meaning: "生徒", unit: "unit6", number: 371 },
+            { word: "able", pronunciation: "[éɪbəl]", meaning: "できる、能力がある", unit: "unit6", number: 372 },
+            { word: "be able to", pronunciation: "[bi éɪbəl tuː]", meaning: "～することができる", unit: "unit6", number: 373 },
+            { word: "communicate", pronunciation: "[kəmjúːnəkeɪt]", meaning: "意思疎通をする", unit: "unit6", number: 374 },
+            { word: "well", pronunciation: "[wel]", meaning: "うまく", unit: "unit6", number: 375 },
+            { word: "because", pronunciation: "[bɪkɔ́ːz]", meaning: "～だから、～なので", unit: "unit6", number: 376 },
+            { word: "talked", pronunciation: "[tɔːkt]", meaning: "話した", unit: "unit6", number: 377 },
+            { word: "first time", pronunciation: "[fɜːrst taɪm]", meaning: "初めて", unit: "unit6", number: 378 },
+            { word: "enjoyed", pronunciation: "[ɪndʒɔɪd]", meaning: "楽しんだ", unit: "unit6", number: 379 },
+            { word: "working", pronunciation: "[wɜːrkɪŋ]", meaning: "働くこと", unit: "unit6", number: 380 },
+            { word: "with", pronunciation: "[wɪð]", meaning: "～と", unit: "unit6", number: 381 },
+            { word: "also", pronunciation: "[ɔ́ːlsoʊ]", meaning: "また", unit: "unit6", number: 382 },
+            { word: "learned", pronunciation: "[lɜːrnd]", meaning: "学んだ", unit: "unit6", number: 383 },
+            { word: "that", pronunciation: "[ðæt]", meaning: "～ということ", unit: "unit6", number: 384 },
+            { word: "teaching", pronunciation: "[tíːtʃɪŋ]", meaning: "教えること", unit: "unit6", number: 385 },
+            { word: "hard work", pronunciation: "[hɑːrd wɜːrk]", meaning: "大変な仕事", unit: "unit6", number: 386 },
+            { word: "glad", pronunciation: "[glæd]", meaning: "うれしく思う", unit: "unit6", number: 387 }
+        ];
+
+        // DOM要素
+        const searchBox = document.getElementById('searchBox');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const visibleWordsCount = document.getElementById('visibleWords');
+        const progressFill = document.getElementById('progressFill');
+
+        // 現在のフィルター
+        let currentFilter = 'all';
+        let currentSearch = '';
+
+        // 単語カードを作成
+        function createVocabCard(vocab) {
+            return `
+                <div class="vocab-card" data-unit="${vocab.unit}" data-word="${vocab.word.toLowerCase()}" data-meaning="${vocab.meaning}">
+                    <div class="vocab-number">#${vocab.number}</div>
+                    <div class="vocab-word">${vocab.word}</div>
+                    <div class="vocab-pronunciation">${vocab.pronunciation}</div>
+                    <div class="vocab-meaning">${vocab.meaning}</div>
+                </div>
+            `;
+        }
+
+        // 単語を各ユニットのグリッドに配置
+        function renderVocabulary() {
+            const grids = {
+                unit3: document.getElementById('unit3Grid'),
+                'lets-read': document.getElementById('letsReadGrid'),
+                unit4: document.getElementById('unit4Grid'),
+                unit5: document.getElementById('unit5Grid'),
+                unit6: document.getElementById('unit6Grid'),
+                daily: document.getElementById('dailyGrid'),
+                other: document.getElementById('otherGrid')
+            };
+
+            // 各グリッドをクリア
+            Object.values(grids).forEach(grid => grid.innerHTML = '');
+
+            // 単語をユニット別に配置
+            vocabularyData.forEach(vocab => {
+                if (grids[vocab.unit]) {
+                    grids[vocab.unit].innerHTML += createVocabCard(vocab);
+                }
+            });
+        }
+
+        // フィルタリング機能
+        function filterVocabulary() {
+            const cards = document.querySelectorAll('.vocab-card');
+            const sections = document.querySelectorAll('.unit-section');
+            let visibleCount = 0;
+
+            // すべてのセクションを非表示
+            sections.forEach(section => section.classList.add('hidden'));
+
+            cards.forEach(card => {
+                const unitMatch = currentFilter === 'all' || card.dataset.unit === currentFilter;
+                const searchMatch = currentSearch === '' || 
+                    card.dataset.word.includes(currentSearch.toLowerCase()) ||
+                    card.dataset.meaning.includes(currentSearch);
+
+                if (unitMatch && searchMatch) {
+                    card.style.display = 'block';
+                    // 親セクションを表示
+                    card.closest('.unit-section').classList.remove('hidden');
+                    visibleCount++;
+                    
+                    // 検索ハイライト
+                    if (currentSearch) {
+                        highlightText(card, currentSearch);
+                    } else {
+                        removeHighlight(card);
+                    }
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // 表示中の単語数を更新
+            visibleWordsCount.textContent = visibleCount;
+            
+            // プログレスバーを更新
+            const progress = (visibleCount / vocabularyData.length) * 100;
+            progressFill.style.width = `${progress}%`;
+        }
+
+        // テキストハイライト機能
+        function highlightText(card, searchTerm) {
+            const elements = card.querySelectorAll('.vocab-word, .vocab-meaning');
+            elements.forEach(element => {
+                const text = element.textContent;
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                element.innerHTML = text.replace(regex, '<span class="highlight">$1</span>');
+            });
+        }
+
+        // ハイライト削除
+        function removeHighlight(card) {
+            const highlights = card.querySelectorAll('.highlight');
+            highlights.forEach(highlight => {
+                highlight.outerHTML = highlight.textContent;
+            });
+        }
+
+        // イベントリスナー
+        searchBox.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            filterVocabulary();
+        });
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // アクティブボタンを更新
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                currentFilter = button.dataset.unit;
+                filterVocabulary();
+            });
+        });
+
+        // 初期化
+        renderVocabulary();
+        filterVocabulary();
+
+        // スムーズスクロール
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
